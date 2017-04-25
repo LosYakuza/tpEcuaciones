@@ -17,7 +17,7 @@ public class VectorMath {
 	public void agregarValor(double valor) {
 
 		if (this.agregados == this.dim)
-			throw new RuntimeException("Se supera la dimension establecida");
+			throw new DistDimException("Se supera la dimension establecida");
 
 		this.vector[this.agregados] = valor;
 		this.agregados++;
@@ -33,7 +33,7 @@ public class VectorMath {
 	public VectorMath sumar(VectorMath obj) {
 
 		if (this.dim != obj.dim)
-			throw new RuntimeException("vectores de distinta dimension");
+			throw new DistDimException("vectores de distinta dimension");
  
 		VectorMath aux = new VectorMath(this.dim);
 
@@ -47,7 +47,7 @@ public class VectorMath {
 	public VectorMath restar(VectorMath obj) {
 
 		if (this.dim != obj.dim)
-			throw new RuntimeException("vectores de distinta dimension");
+			throw new DistDimException("vectores de distinta dimension");
 
 		VectorMath aux = new VectorMath(this.dim);
 
@@ -107,7 +107,7 @@ public class VectorMath {
 	public VectorMath multiplicar(VectorMath obj) {
 
 		if (this.dim != obj.dim)
-			throw new RuntimeException("vectores de distinta dimension");
+			throw new DistDimException("vectores de distinta dimension");
 
 		VectorMath aux = new VectorMath(this.dim);
 
