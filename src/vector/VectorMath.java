@@ -14,6 +14,18 @@ public class VectorMath {
 		this.agregados = 0;
 	}
 
+	public int len(){ return this.dim; }
+	
+	/**
+	 * Leer valor
+	 * @param i fila
+	 */
+	public double leerElemento(int i) {
+		if(i>=this.dim)
+			throw new DistDimException("Fuera de rango");
+		return this.vector[i];
+	}
+	
 	public void agregarValor(double valor) {
 
 		if (this.agregados == this.dim)
