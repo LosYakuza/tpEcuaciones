@@ -195,5 +195,15 @@ public class VectorMath {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		String s = "[";
+		int i;
+		for(i=0;i<this.dim;i++){
+			s+=this.vector[i]+ ";";
+		}
+		s=s.substring(0, s.length()-1);
+		return s+"]";
+	}
 	
 }

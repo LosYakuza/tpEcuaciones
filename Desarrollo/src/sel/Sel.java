@@ -1,5 +1,8 @@
 package sel;
 
+import java.io.File;
+import java.util.Scanner;
+
 import algebra.MatrizMath;
 import algebra.VectorMath;
 
@@ -14,13 +17,34 @@ public class Sel {
 		this.b = b;
 	}
 
+	/**
+	 * Resuelve sistema
+	 * @return
+	 */
 	public MatrizMath solve() {
 		this.s = this.a.inversa().multiplicar(this.b);
 		return s;
 	}
+	
+	/**
+	 * Devuelve matriz solucion
+	 * @return
+	 */
+	public MatrizMath getSolve(){
+		return this.s;
+	}
 
+	
+	/**
+	 * Calcula el error cometido
+	 * @return
+	 */
 	public double errorCheck() {
-		return this.a.multiplicar(this.s).restar(MatrizMath.castVec(this.b)).det();
+		try{
+			return this.a.multiplicar(this.s).restar(MatrizMath.castVec(this.b)).det();
+		}catch (RuntimeException e) {
+			return 0;
+		}
 	}
 	
 }

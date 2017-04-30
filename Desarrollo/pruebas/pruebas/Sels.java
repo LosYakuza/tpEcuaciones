@@ -7,9 +7,11 @@ import org.junit.Test;
 import algebra.MatrizMath;
 import algebra.VectorMath;
 import sel.Sel;
+import sel.SelFile;
 
 import java.util.GregorianCalendar;
 import java.util.Random;
+import java.io.File;
 import java.util.Calendar;
 
 public class Sels {
@@ -70,6 +72,27 @@ public class Sels {
 		Sel sel = new Sel(a, b);
 		sel.solve();
 		assertEquals(0, sel.errorCheck(), 1e-8);
+	}
+	
+	/**
+	 * Ejecuta tests
+	 */
+	@Test
+	public void errorTestCase() {
+		String folderIn = "../PreparacionPrueba/Lote de Prueba/Entrada/";
+		String folderOut= "../EjecucionPruebas/";
+		File folder = new File(folderIn);
+		File[] listOfFiles = folder.listFiles();
+
+		for (File file : listOfFiles) {
+		    if (file.isFile()) {
+		    	Sel sel = SelFile.cargar(folderIn+file.getName());
+		    	sel.solve();
+		        SelFile.guardar(sel,
+		        		folderOut+file.getName().replaceAll(".in", ".out"));
+		    }
+		}
+		
 	}
 
 }
