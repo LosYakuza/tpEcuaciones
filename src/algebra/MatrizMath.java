@@ -1,4 +1,4 @@
-package vector;
+package algebra;
 
 import java.util.Arrays;
 
@@ -7,16 +7,29 @@ public class MatrizMath {
 	private int fil;
 	private int col;
 
+	/**
+	 * Constructor
+	 * @param i filas
+	 * @param j columnas
+	 */
 	public MatrizMath(int i, int j) {
 		this.mat = new double[i][j];
 		this.fil = i;
 		this.col = j;
 	}
 
+	/**
+	 * Llena matriz desde array
+	 * @param m
+	 */
 	public void cargarDesdevector(double [][] m){
 		this.mat =m;
 	}
 	
+	/**
+	 * Llena matriz con formato octave
+	 * @param s
+	 */
 	public void cargarDesdeStrOctave(String s){
 		s = s.substring(1, s.length()-1);
 		String [] fs = s.split(";");
@@ -114,8 +127,8 @@ public class MatrizMath {
 			throw new DistDimException("Fuera de rango");
 		MatrizMath s = new MatrizMath(this.getFil(), this.getCol());
 		int i,j;
-		for(i=0;i<=this.fil;i++){
-			for(j=0;j<=this.col;j++){
+		for(i=0;i<this.fil;i++){
+			for(j=0;j<this.col;j++){
 				s.cargarElemento(i, j,
 						this.leerElemento(i, j) -
 						m.leerElemento(i, j));
@@ -233,7 +246,10 @@ public class MatrizMath {
 		return s+"]";
 	}
 	
-	
+	/**
+	 * Retorna inversa de la matriz
+	 * @return
+	 */
 	public MatrizMath inversa(){
 		if(this.col!=this.fil)
 			throw new DistDimException("Matriz debe ser cuadrada");
@@ -243,6 +259,43 @@ public class MatrizMath {
 		return m;
 	}
 	
+	
+	public double det(){
+		GaussJ inv = new GaussJ(this.mat,this.col);
+		return inv.getDet();
+	}
+	
+	public double normaUno() {
+		double max = 0, acum = 0;
+		for (int j = 0; j < this.col; j++) {
+			for (int i = 0; i < this.fil; i++) {
+				if (this.mat[i][j] < 0)
+					acum += this.mat[i][j] * (-1);
+				else
+					acum += this.mat[i][j];
+			}
+			if (acum > max)
+				max = acum;
+			acum = 0;
+		}
+		return max;
+	}
+
+	public double normaInfinito() {
+		double max = 0, acum = 0;
+		for (int i = 0; i < this.col; i++) {
+			for (int j = 0; j < this.fil; j++) {
+				if (this.mat[i][j] < 0)
+					acum += this.mat[i][j] * (-1);
+				else
+					acum += this.mat[i][j];
+			}
+			if (acum > max)
+				max = acum;
+			acum = 0;
+		}
+		return max;
+	}
 	
 	
 }

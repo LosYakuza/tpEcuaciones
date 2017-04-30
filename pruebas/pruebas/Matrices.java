@@ -1,4 +1,4 @@
-package vector;
+package pruebas;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,10 @@ import java.util.Random;
 
 import org.junit.Test;
 
-public class PruebaMatrices {
+import algebra.MatrizMath;
+import algebra.VectorMath;
+
+public class Matrices {
 
 	/**
 	 * Genera matriz identidad
@@ -23,7 +26,6 @@ public class PruebaMatrices {
 		return i;
 
 	}
-
 	
 	@Test
 	public void ejemploTp(){
@@ -39,9 +41,9 @@ public class PruebaMatrices {
 		tpT.cargarElemento(2, 2, 1);
 
 		VectorMath b = new VectorMath(3);
-		b.agregarValor(0);
-		b.agregarValor(1);
-		b.agregarValor(2);
+		b.agregarValor(0,0);
+		b.agregarValor(1,1);
+		b.agregarValor(2,2);
 		tpT = tpT.inversa().multiplicar(b);
 		
 		MatrizMath res = new MatrizMath(3, 1);
@@ -60,13 +62,26 @@ public class PruebaMatrices {
 				mi.cargarElemento(i, j, r.nextDouble() * 100);
 			}
 		}
-		
-		//test resultado
 		assertEquals(true, getI(size).equals(mi.multiplicar(mi.inversa())));
 	}
 	
+	
 	@Test
-	public void testMultiplicacion() {
+	public void errorInversa(){
+		int size = 500;
+		Random r = new Random();
+		MatrizMath mi = new MatrizMath(size, size);
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				mi.cargarElemento(i, j, r.nextDouble() * 100);
+			}
+		}
+		assertEquals(true, 
+				mi.multiplicar(mi.inversa()).restar(getI(size)).det() < 1e-8);
+	}
+	
+	@Test
+	public void multiplicacion() {
 
 		// -------test Ejemplo ------
 		MatrizMath m1 = new MatrizMath(4, 4);

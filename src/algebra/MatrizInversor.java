@@ -1,4 +1,4 @@
-package vector;
+package algebra;
 
 public class MatrizInversor {
 	private MatrizMath m;

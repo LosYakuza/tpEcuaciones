@@ -1,4 +1,4 @@
-package vector;
+package algebra;
 
 import java.util.Arrays;
 
@@ -6,12 +6,10 @@ public class VectorMath {
 
 	private double vector[];
 	private int dim;
-	private int agregados;
 
 	public VectorMath(int dim) {
 		this.vector = new double[dim];
 		this.dim = dim;
-		this.agregados = 0;
 	}
 
 	public int len(){ return this.dim; }
@@ -26,36 +24,37 @@ public class VectorMath {
 		return this.vector[i];
 	}
 	
-	public void agregarValor(double valor) {
-
-		if (this.agregados == this.dim)
+	public void agregarValor(int pos,double valor) {
+		if (pos >= this.dim)
 			throw new DistDimException("Se supera la dimension establecida");
 
-		this.vector[this.agregados] = valor;
-		this.agregados++;
+		this.vector[pos] = valor;
 
 	}
 
-	public void mostrarVec() {
-
-		for (int i = 0; i < agregados; i++)
-			System.out.println(this.vector[i]);
-	}
-
+	/**
+	 * Suma vectores
+	 * @param obj
+	 * @return
+	 */
 	public VectorMath sumar(VectorMath obj) {
-
 		if (this.dim != obj.dim)
 			throw new DistDimException("vectores de distinta dimension");
  
 		VectorMath aux = new VectorMath(this.dim);
 
 		for (int i = 0; i < this.dim; i++)
-			aux.agregarValor(this.vector[i] + obj.vector[i]);
+			aux.agregarValor(i,this.vector[i] + obj.vector[i]);
 
 		return aux;
 
 	}
    
+	/**
+	 * Resta vector
+	 * @param obj
+	 * @return
+	 */
 	public VectorMath restar(VectorMath obj) {
 
 		if (this.dim != obj.dim)
@@ -64,22 +63,31 @@ public class VectorMath {
 		VectorMath aux = new VectorMath(this.dim);
 
 		for (int i = 0; i < this.dim; i++)
-			aux.agregarValor(this.vector[i] - obj.vector[i]);
+			aux.agregarValor(i, this.vector[i] - obj.vector[i]);
 
 		return aux;
 
 	}
 	
 	
+	/**
+	 * Multiplica por k
+	 * @param obj
+	 * @return
+	 */
 	public VectorMath multiplicar(double obj) {
 		VectorMath aux = new VectorMath(this.dim);
 
 		for (int i = 0; i < this.dim; i++)
-			aux.agregarValor(this.vector[i] * obj);
+			aux.agregarValor(i,this.vector[i] * obj);
 
 		return aux;
 	}
 	
+	/**
+	 * Devuelve norma uno
+	 * @return
+	 */
 	public double normaUno() {
 		double s =0;
 
@@ -92,6 +100,10 @@ public class VectorMath {
 		return s;
 	}
 	
+	/**
+	 * Devuelve modulo del vector
+	 * @return
+	 */
 	public double normaDos() {
 		double s =0;
 
@@ -101,6 +113,10 @@ public class VectorMath {
 		return Math.sqrt(s);
 	}
 	
+	/**
+	 * Devuelve numero maximo
+	 * @return
+	 */
 	public double normaInf() {
 		double m =0;
 		double abs=0;
@@ -116,6 +132,11 @@ public class VectorMath {
 		return m;
 	}
 	
+	/**
+	 * Multiplica por otro vector
+	 * @param obj
+	 * @return
+	 */
 	public VectorMath multiplicar(VectorMath obj) {
 
 		if (this.dim != obj.dim)
@@ -124,25 +145,35 @@ public class VectorMath {
 		VectorMath aux = new VectorMath(this.dim);
 
 		for (int i = 0; i < this.dim; i++)
-			aux.agregarValor(this.vector[i] * obj.vector[i]);
+			aux.agregarValor(i,this.vector[i] * obj.vector[i]);
 
 		return aux;
 
 	}
+	
+	@Override
 	public VectorMath clone() {
 		VectorMath v = new VectorMath(this.dim);
 
-		for (int i = 0; i < this.agregados; i++)
-			v.agregarValor(this.vector[i]);
+		for (int i = 0; i < dim; i++)
+			v.agregarValor(i,this.vector[i]);
 
 		return v;
+	}
+
+	/**
+	 * Multiplica por matriz
+	 * @param m
+	 * @return
+	 */
+	public MatrizMath multiplicar(MatrizMath m){
+		return MatrizMath.castVec(this).multiplicar(m);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + agregados;
 		result = prime * result + dim;
 		result = prime * result + Arrays.hashCode(vector);
 		return result;
@@ -157,16 +188,12 @@ public class VectorMath {
 		if (getClass() != obj.getClass())
 			return false;
 		VectorMath other = (VectorMath) obj;
-		if (agregados != other.agregados)
-			return false;
 		if (dim != other.dim)
 			return false;
 		if (!Arrays.equals(vector, other.vector))
 			return false;
 		return true;
 	}
-
-	public MatrizMath multiplicar(MatrizMath m){
-		return MatrizMath.castVec(this).multiplicar(m);
-	}
+	
+	
 }

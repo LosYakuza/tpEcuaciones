@@ -1,4 +1,4 @@
-package vector;
+package algebra;
 
 public class DistDimException extends ArithmeticException {
     public DistDimException(String mensaje)
