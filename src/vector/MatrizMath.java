@@ -13,13 +13,35 @@ public class MatrizMath {
 		this.col = j;
 	}
 
+	public void cargarDesdevector(double [][] m){
+		this.mat =m;
+	}
+	
+	public void cargarDesdeStrOctave(String s){
+		s = s.substring(1, s.length()-1);
+		String [] fs = s.split(";");
+		for(int i=0;i<fs.length;i++){
+			String [] cs = fs[i].split(" ");
+			for(int j = 0; j<cs.length; j++){
+				this.cargarElemento(i, j, Double.parseDouble(cs[j]));
+			}
+		}
+	}
+	
+	@Override
+	protected MatrizMath clone() {
+		MatrizMath m = new MatrizMath(this.fil, this.col);
+		m.cargarDesdevector(this.mat);
+		return m;
+	}
+
 	/**
 	 * Convierte vector a matriz
 	 * @param v
 	 * @return
 	 */
 	public static MatrizMath castVec(VectorMath v){
-		MatrizMath s = new MatrizMath(v.len(), 0);
+		MatrizMath s = new MatrizMath(v.len(), 1);
 		int i;
 		for(i=0;i<v.len();i++){
 			s.cargarElemento(i, 0, v.leerElemento(i)); 
@@ -140,7 +162,7 @@ public class MatrizMath {
 		int i,j;
 		for(i=0;i<this.getFil();i++){
 			for(j=0;j<m.getCol();j++){
-				for (int z=0; z<m.getCol(); z++) {
+				for (int z=0; z< this.getCol(); z++) {
 					s.cargarElemento(i, j,
 							s.leerElemento(i, j) +
 							this.leerElemento(i, z) *
@@ -210,5 +232,17 @@ public class MatrizMath {
 		s=s.substring(0, s.length()-1);
 		return s+"]";
 	}
+	
+	
+	public MatrizMath inversa(){
+		if(this.col!=this.fil)
+			throw new DistDimException("Matriz debe ser cuadrada");
+		GaussJ inv = new GaussJ(this.mat,this.col);
+		MatrizMath m = new MatrizMath(this.fil, this.col);
+		m.cargarDesdevector(inv.getInvert());
+		return m;
+	}
+	
+	
 	
 }

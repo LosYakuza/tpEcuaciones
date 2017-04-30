@@ -166,4 +166,7 @@ public class VectorMath {
 		return true;
 	}
 
+	public MatrizMath multiplicar(MatrizMath m){
+		return MatrizMath.castVec(this).multiplicar(m);
+	}
 }
