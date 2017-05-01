@@ -21,7 +21,7 @@ public abstract class SelFile {
 		int i;
 		MatrizMath s = sel.getSolucion();
 		try {
-			fstream = new FileWriter(path, true);
+			fstream = new FileWriter(path);
 	        BufferedWriter out = new BufferedWriter(fstream);
 	        out.write(String.valueOf(s.getFil()));
 	        out.newLine();
