@@ -41,9 +41,9 @@ public class Matrices {
 		tpT.cargarElemento(2, 2, 1);
 
 		VectorMath b = new VectorMath(3);
-		b.agregarValor(0,0);
-		b.agregarValor(1,1);
-		b.agregarValor(2,2);
+		b.cargarElemento(0,0);
+		b.cargarElemento(1,1);
+		b.cargarElemento(2,2);
 		tpT = tpT.inversa().multiplicar(b);
 		
 		MatrizMath res = new MatrizMath(3, 1);

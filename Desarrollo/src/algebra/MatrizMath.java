@@ -42,7 +42,7 @@ public class MatrizMath {
 	}
 	
 	@Override
-	protected MatrizMath clone() {
+	public MatrizMath clone() {
 		MatrizMath m = new MatrizMath(this.fil, this.col);
 		m.cargarDesdevector(this.mat);
 		return m;
@@ -54,9 +54,9 @@ public class MatrizMath {
 	 * @return
 	 */
 	public static MatrizMath castVec(VectorMath v){
-		MatrizMath s = new MatrizMath(v.len(), 1);
+		MatrizMath s = new MatrizMath(v.getDim(), 1);
 		int i;
-		for(i=0;i<v.len();i++){
+		for(i=0;i<v.getDim();i++){
 			s.cargarElemento(i, 0, v.leerElemento(i)); 
 		}
 		return s;
