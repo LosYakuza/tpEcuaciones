@@ -281,6 +281,16 @@ public class MatrizMath {
 		return max;
 	}
 
+	public double normaDos(){
+		double acum=0;
+		for(int i=0;i<this.getFil();i++)
+			for(int j=0;j<this.getCol();j++)
+				acum+=Math.pow(this.leerElemento(i, j), 2);
+		
+		return Math.sqrt(acum);
+		
+	}
+	
 	public double normaInfinito() {
 		double max = 0, acum = 0;
 		for (int i = 0; i < this.col; i++) {
