@@ -20,7 +20,11 @@ public class Sel {
 	 * @return
 	 */
 	public MatrizMath resolver() {
-		this.s = this.a.inversa().multiplicar(this.b);
+		try{
+			this.s = this.a.inversa().multiplicar(this.b);
+		}catch (Exception e) {
+			return null;
+		}
 		return s;
 	}
 

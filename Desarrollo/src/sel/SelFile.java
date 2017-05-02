@@ -20,6 +20,8 @@ public abstract class SelFile {
 		FileWriter fstream;
 		int i;
 		MatrizMath s = sel.getSolucion();
+		if(s==null)
+			return;
 		try {
 			fstream = new FileWriter(path);
 	        BufferedWriter out = new BufferedWriter(fstream);
