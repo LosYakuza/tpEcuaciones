@@ -89,7 +89,7 @@ public class Sels {
 		    	Sel sel = SelFile.cargar(folderIn+file.getName());
 		    	sel.resolver();
 		        SelFile.guardar(sel,
-		        		folderOut+file.getName().replaceAll(".in", ".out"));
+		        		folderOut+file.getName().replaceAll("\\.in", ".out"));
 		    }
 		}
 		
