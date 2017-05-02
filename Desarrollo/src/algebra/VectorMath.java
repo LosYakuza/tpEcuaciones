@@ -12,7 +12,7 @@ public class VectorMath {
 		this.dim = dim;
 	}
 
-	public int len(){ return this.dim; }
+	public int getDim(){ return this.dim; }
 	
 	/**
 	 * Leer valor
@@ -24,7 +24,7 @@ public class VectorMath {
 		return this.vector[i];
 	}
 	
-	public void agregarValor(int pos,double valor) {
+	public void cargarElemento(int pos,double valor) {
 		if (pos >= this.dim)
 			throw new DistDimException("Se supera la dimension establecida");
 
@@ -44,7 +44,7 @@ public class VectorMath {
 		VectorMath aux = new VectorMath(this.dim);
 
 		for (int i = 0; i < this.dim; i++)
-			aux.agregarValor(i,this.vector[i] + obj.vector[i]);
+			aux.cargarElemento(i,this.vector[i] + obj.vector[i]);
 
 		return aux;
 
@@ -63,7 +63,7 @@ public class VectorMath {
 		VectorMath aux = new VectorMath(this.dim);
 
 		for (int i = 0; i < this.dim; i++)
-			aux.agregarValor(i, this.vector[i] - obj.vector[i]);
+			aux.cargarElemento(i, this.vector[i] - obj.vector[i]);
 
 		return aux;
 
@@ -79,7 +79,7 @@ public class VectorMath {
 		VectorMath aux = new VectorMath(this.dim);
 
 		for (int i = 0; i < this.dim; i++)
-			aux.agregarValor(i,this.vector[i] * obj);
+			aux.cargarElemento(i,this.vector[i] * obj);
 
 		return aux;
 	}
@@ -117,7 +117,7 @@ public class VectorMath {
 	 * Devuelve numero maximo
 	 * @return
 	 */
-	public double normaInf() {
+	public double normaInfinito() {
 		double m =0;
 		double abs=0;
 		for (int i = 0; i < this.dim; i++){
@@ -145,7 +145,7 @@ public class VectorMath {
 		VectorMath aux = new VectorMath(this.dim);
 
 		for (int i = 0; i < this.dim; i++)
-			aux.agregarValor(i,this.vector[i] * obj.vector[i]);
+			aux.cargarElemento(i,this.vector[i] * obj.vector[i]);
 
 		return aux;
 
@@ -156,7 +156,7 @@ public class VectorMath {
 		VectorMath v = new VectorMath(this.dim);
 
 		for (int i = 0; i < dim; i++)
-			v.agregarValor(i,this.vector[i]);
+			v.cargarElemento(i,this.vector[i]);
 
 		return v;
 	}

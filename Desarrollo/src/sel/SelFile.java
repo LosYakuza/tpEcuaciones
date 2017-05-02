@@ -11,12 +11,19 @@ import algebra.VectorMath;
 
 public abstract class SelFile {
 
+	/**
+	 * Guarda la solucion en archivo
+	 * @param sel
+	 * @param path
+	 */
 	public static void guardar(Sel sel,String path){
 		FileWriter fstream;
 		int i;
-		MatrizMath s = sel.getSolve();
+		MatrizMath s = sel.getSolucion();
+		if(s==null)
+			return;
 		try {
-			fstream = new FileWriter(path, true);
+			fstream = new FileWriter(path);
 	        BufferedWriter out = new BufferedWriter(fstream);
 	        out.write(String.valueOf(s.getFil()));
 	        out.newLine();
@@ -25,7 +32,7 @@ public abstract class SelFile {
 	        	out.newLine();
 	        }
 	        out.newLine();
-	        out.write(String.valueOf(sel.errorCheck()));
+	        out.write(String.valueOf(sel.getError()));
 	        out.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -33,7 +40,11 @@ public abstract class SelFile {
 		}
 	}
 	
-	
+	/**
+	 * Carga SEL
+	 * @param path
+	 * @return
+	 */
 	public static Sel cargar(String path){
 		MatrizMath a;
 		VectorMath b;
@@ -58,7 +69,7 @@ public abstract class SelFile {
 	        }
 	        i=0;
 	        while (sc.hasNextLine() && i<size) {
-	        	b.agregarValor(i, Double.parseDouble(sc.nextLine()));
+	        	b.cargarElemento(i, Double.parseDouble(sc.nextLine()));
 	        	i++;
 	        }
 	        sc.close();

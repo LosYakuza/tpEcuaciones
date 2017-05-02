@@ -25,7 +25,7 @@ public class Sels {
 	private double solveTime(MatrizMath a, VectorMath b){
 		Calendar tIni = new GregorianCalendar();
 		Sel sel = new Sel(a, b);
-		sel.solve();
+		sel.resolver();
 		Calendar tFin = new GregorianCalendar();
 		return tFin.getTimeInMillis() - tIni.getTimeInMillis();
 	}
@@ -46,7 +46,7 @@ public class Sels {
 				for (int j = 0; j < size; j++) {
 					a.cargarElemento(i, j, r.nextDouble() * 100);
 				}
-				b.agregarValor(i, r.nextDouble() * 100);
+				b.cargarElemento(i, r.nextDouble() * 100);
 			}
 			System.out.println(a.getFil() + "\t" + solveTime(a, b));
 		}
@@ -67,11 +67,11 @@ public class Sels {
 			for (int j = 0; j < size; j++) {
 				a.cargarElemento(i, j, r.nextDouble() * 100);
 			}
-			b.agregarValor(i, r.nextDouble() * 100);
+			b.cargarElemento(i, r.nextDouble() * 100);
 		}
 		Sel sel = new Sel(a, b);
-		sel.solve();
-		assertEquals(0, sel.errorCheck(), 1e-8);
+		sel.resolver();
+		assertEquals(0, sel.getError(), 1e-8);
 	}
 	
 	/**
@@ -87,9 +87,9 @@ public class Sels {
 		for (File file : listOfFiles) {
 		    if (file.isFile()) {
 		    	Sel sel = SelFile.cargar(folderIn+file.getName());
-		    	sel.solve();
+		    	sel.resolver();
 		        SelFile.guardar(sel,
-		        		folderOut+file.getName().replaceAll(".in", ".out"));
+		        		folderOut+file.getName().replaceAll("\\.in", ".out"));
 		    }
 		}
 		
