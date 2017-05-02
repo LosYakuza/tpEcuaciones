@@ -81,6 +81,9 @@ public class Sels {
 	public void errorTestCase() {
 		String folderIn = "../PreparacionPrueba/Lote de Prueba/Entrada/";
 		String folderOut= "../EjecucionPruebas/";
+		
+		/*String folderIn = "C:/Users/Boxer&Beto/Documents/GitHub/tpEcuaciones/PreparacionPrueba/Lote de Prueba/Entrada/";
+		String folderOut= "C:/Users/Boxer&Beto/Documents/GitHub/tpEcuaciones/EjecucionPruebas/";*/
 		File folder = new File(folderIn);
 		File[] listOfFiles = folder.listFiles();
 
